@@ -1,6 +1,17 @@
 {
+    "name": "eche",
 
     "require": {
-        "robmorgan/phinx": "^0.12.1"
+        "robmorgan/phinx": "^0.12.1",
+        "vlucas/phpdotenv": "^4.1",
+        "symfony/yaml": "^5.0",
+        "illuminate/database": "^7.10",
+        "klein/klein": "^2.1",
+        "illuminate/events": "^7.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "API\\": "src/"
+        }
     }
 }
