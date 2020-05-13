@@ -1,14 +1,10 @@
 <?php
 namespace API\Models;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Files
+class Files extends Model
 {
-    public function __construct()
-    {
-
-    }
+    protected $table = 'files';
 }

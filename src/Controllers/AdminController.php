@@ -12,7 +12,10 @@ class AdminController
         $admin->save();
     }
 
-    public function create1() {
-
+    public function create1(array $adminParams) {
+        $admin = new Admin();
+        $admin->username = $adminParams['username'];
+        $admin->password = $adminParams['password'];
+        $admin->save();
     }
 }
