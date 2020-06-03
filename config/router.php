@@ -2,6 +2,10 @@
 
 use \API\Controllers\AdminController;
 use \API\Controllers\QRCodeController;
+use API\Models\Admin;
+use Valitron\Validator;
+
+
 
 function payLoadExtractor() {
     $json = file_get_contents("php://input");
@@ -10,10 +14,16 @@ function payLoadExtractor() {
 
 $klein = new \Klein\Klein();
 
-$klein->respond('POST','/admin', function () {
+$klein->respond('POST','/admin/signup', function () {
     $adminController = new AdminController();
     $adminController->create(payLoadExtractor());
     return "Admin created!";
+});
+
+$klein->respond('POST', '/admin/signin', function($request, $response) {
+    $adminController = new AdminController();
+    $admins = $adminController->signin(payLoadExtractor());
+    $response->body($admins); 
 });
 
 $klein->post('/qrcode', function () {
