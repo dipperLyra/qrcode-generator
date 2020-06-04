@@ -14,9 +14,9 @@ function payLoadExtractor() {
 
 $klein = new \Klein\Klein();
 
-$klein->respond('POST','/admin/signup', function () {
+$klein->post('/admin/signup', function ($request, $response) {
     $adminController = new AdminController();
-    $adminController->create(payLoadExtractor());
+    $adminController->createAdmin(payLoadExtractor());
     return "Admin created!";
 });
 
