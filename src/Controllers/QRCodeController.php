@@ -29,6 +29,7 @@ class QRCodeController
     }
 
     function getAllQRImages() {
+        
         return Files::all();
     }
 

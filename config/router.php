@@ -32,9 +32,14 @@ $klein->post('/qrcode', function () {
     return "QR Code created!";
 });
 
-$klein->get('/qrcode', function () {
-    $qrController = new QRCodeController();
-    return $qrController->getAllQRImages();
+$klein->get('/admin/images', function ($request, $response) {
+    $adminController = new AdminController();
+    $images = $adminController->listAllQRCodes((array) $request->headers());
+    if (isset($_SERVER['Authorization'])) {
+        $headers = trim($_SERVER["Authorization"]);
+    }
+    //$response->body($request->headers()); 
+    print_r($request->headers()['Bearer']);
 });
 
 $klein->dispatch();
