@@ -1,5 +1,5 @@
 {
-    "name": "eche",
+    "name": "eche/qr-code-client",
 
     "require": {
         "robmorgan/phinx": "^0.12.1",
@@ -10,7 +10,8 @@
         "illuminate/events": "^7.10",
         "bacon/bacon-qr-code": "^2.0",
         "firebase/php-jwt": "^5.2",
-        "vlucas/valitron": "^1.4"
+        "vlucas/valitron": "^1.4",
+        "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

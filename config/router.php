@@ -14,10 +14,22 @@ function payLoadExtractor() {
 
 $klein = new \Klein\Klein();
 
-$klein->post('/admin/signup', function ($request, $response) {
+$klein->post('/super-admin', function ($request, $response) {
     $adminController = new AdminController();
-    $adminController->createAdmin(payLoadExtractor());
-    return "Admin created!";
+    $send = $adminController->superAdminToken(payLoadExtractor());
+    print_r($send);
+});
+
+$klein->post('/admin', function ($request, $response) {
+    $adminController = new AdminController();
+    $send = $adminController->createAdmin(payLoadExtractor());
+    print_r($send);
+});
+
+$klein->post('/admin/signin', function ($request, $response) {
+    $adminController = new AdminController();
+    $send = $adminController->signin(payLoadExtractor());
+    print_r($send);
 });
 
 $klein->respond('POST', '/admin/signin', function($request, $response) {
@@ -39,7 +51,7 @@ $klein->get('/admin/images', function ($request, $response) {
         $headers = trim($_SERVER["Authorization"]);
     }
     //$response->body($request->headers()); 
-    print_r($request->headers()['Bearer']);
+    print_r($request->headers());
 });
 
 $klein->dispatch();
