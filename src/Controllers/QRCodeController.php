@@ -4,7 +4,7 @@
 namespace API\Controllers;
 
 
-use API\Models\Files;
+use API\Models\Image;
 use API\Services\QRGenerator;
 
 class QRCodeController
@@ -19,22 +19,27 @@ class QRCodeController
         $this->qrtext = $qrtext['text'];
         $this->filePath = dirname(__DIR__) . '/files/' . $this->fileName . '.png';
         $this->saveFilePathAndText();
+        return json_encode(['data' =>
+            [
+                'message' => 'QR Code created!',
+            ]
+        ]);
     }
 
     function saveFilePathAndText() {
-        $file = new Files();
+        $file = new Image();
         $file->filepath = $this->filePath;
         $file->qr_code_text = $this->qrtext;
         $file->save();
     }
 
-    function getAllQRImages() {
-        
-        return Files::all();
+    function getAllQRImages()
+    {
+        return Image::all();
     }
 
     function deleteQRImages($id) {
-        $file = Files::find($id);
+        $file = Image::find($id);
         if($file) $file->forceDelete();
     }
 }

@@ -4,7 +4,7 @@ namespace API\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Files extends Model
+class Image extends Model
 {
-    protected $table = 'files';
+    protected $table = 'images';
 }

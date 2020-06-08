@@ -100,7 +100,8 @@ class AdminController
         return null;
     }
 
-    public function signin(array $adminParams)
+
+    public function adminSignIn(array $adminParams)
     {
         $v = new Validator($adminParams);
         $v->rule('required', ['username', 'password']);
@@ -125,7 +126,7 @@ class AdminController
             return json_encode(['data' =>
                 [
                     'message' => 'admin sign in successful',
-                    'token' => $jwt
+                    'token' => $jwt,
                 ]
             ]);
         } else {
@@ -136,11 +137,34 @@ class AdminController
                 ]
             ]);
         }
-
     }
 
-    public function listAllQRCodes(array $headers)
+    public function listAllQRCodes($headers)
     {
+        preg_match('/Bearer\s(\S+)/', $headers['Token'], $matches);
 
-    }   
+        if ($matches[1]) {
+            $key = getenv('QUASI_ADMIN_SECRET_KEY');
+            $jwtDecode = JWT::decode($matches[1], $key, array('HS256'));
+
+            if ($jwtDecode) {
+                $qrCodeController = new QRCodeController();
+                $images = $qrCodeController->getAllQRImages();
+                return json_encode(['data' =>
+                    [
+                        'message' => 'All images retrieved!',
+                        'images' => $images,
+                    ]
+                ]);
+            }
+        } else {
+            return json_encode(['data' =>
+                [
+                    'message' => 'failed to retrieve images',
+                    'error' => 'no token attached',
+                ]
+            ]);
+        }
+    }
+
 }
