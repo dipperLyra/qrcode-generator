@@ -130,10 +130,15 @@ Response sample:
   "data":
   {
     "message":"All images retrieved!",
-    "images":[]
+    "images":[https://www.myserver.com/link-to-image]
   }
 }
 ```
+
+Sample qr code generated
+
+![Image](https://raw.githubusercontent.com/dipperLyra/qrcode-generator/master/src/files/qrcode.png)
+
 
 &nbsp; 5. POST /qrcode
 
